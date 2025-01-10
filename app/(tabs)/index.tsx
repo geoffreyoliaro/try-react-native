@@ -1,74 +1,161 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  Switch,
+} from 'react-native';
+// import BottomNav from './BottomNav'; // Import the BottomNav component
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-
-export default function HomeScreen() {
+const HomeScreen = () => {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
+    <ScrollView style={styles.container}>
+      {/* Banner Section */}
+      <View style={styles.banner}>
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+          source={require('@/assets/images/black-friday-one.jpg')} // Replace with the actual banner image URL
+          style={styles.bannerImage}
+          resizeMode='cover'
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      </View>
+
+      {/* Title Section */}
+      <Text style={styles.title}>Produit de la semaine</Text>
+
+      {/* Map Toggle */}
+      <View style={styles.mapToggle}>
+        <Text>MAP</Text>
+        <Switch value={false} onValueChange={() => {}} />
+      </View>
+
+      {/* Categories Section */}
+      <View style={styles.categoriesContainer}>
+        {[
+          { title: 'Restaurant', icon: '🍴' },
+          { title: 'Alimentation', icon: '🛒' },
+          { title: 'Hôtel', icon: '🏨' },
+          { title: 'Santé', icon: '🩺' },
+          { title: 'Divertissement', icon: '🎭' },
+          { title: 'Mode et Accessoires', icon: '👗' },
+          { title: 'Electronics', icon: '💻' },
+          { title: 'Voir tout', icon: '🔍' },
+        ].map((item, index) => (
+          <TouchableOpacity key={index} style={styles.category}>
+            <Text style={styles.categoryIcon}>{item.icon}</Text>
+            <Text style={styles.categoryText}>{item.title}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* Popular Offers Section */}
+      <Text style={styles.sectionTitle}>Offres Populaires</Text>
+      <View style={styles.offersContainer}>
+        {[1, 2, 3].map((_, index) => (
+          <Image
+            key={index}
+            source={require('@/assets/images/black-friday-one.jpg')} // Replace with actual offer images
+            style={styles.offerImage}
+            resizeMode='cover'
+          />
+        ))}
+      </View>
+
+      {/* Discovery Section */}
+      <Text style={styles.sectionTitle}>Découverte</Text>
+      <View style={styles.discoveryContainer}>
+        {[1, 2].map((_, index) => (
+          <Image
+            key={index}
+            source={require('@/assets/images/black-friday-two.jpg')} // Replace with actual discovery images
+            style={styles.discoveryImage}
+            resizeMode='cover'
+          />
+        ))}
+      </View>
+
+      {/* Bottom Navigation */}
+      {/* <BottomNav /> */}
+    </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+  },
+  banner: {
+    width: '100%',
+    height: 200,
+  },
+  bannerImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 10,
+  },
+  mapToggle: {
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: 8,
+    marginVertical: 10,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  categoriesContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    marginVertical: 20,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  category: {
+    width: 80,
+    height: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10,
+    backgroundColor: '#e3f2fd',
+    borderRadius: 40,
+  },
+  categoryIcon: {
+    fontSize: 24,
+  },
+  categoryText: {
+    fontSize: 12,
+    textAlign: 'center',
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginHorizontal: 10,
+    marginVertical: 10,
+  },
+  offersContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginVertical: 10,
+  },
+  offerImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+  },
+  discoveryContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginVertical: 10,
+  },
+  discoveryImage: {
+    width: 150,
+    height: 100,
+    borderRadius: 10,
   },
 });
+
+export default HomeScreen;

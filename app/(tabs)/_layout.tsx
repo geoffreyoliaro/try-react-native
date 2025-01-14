@@ -37,7 +37,7 @@ export default function BottomNav() {
             backgroundColor: '#12a661', // Set the tab background color here
           },
           default: {
-            position: 'absolute',
+            position: 'absolute',            
             backgroundColor: '#12a661', // For other platforms, use the same color
           },
         }),
@@ -53,7 +53,7 @@ export default function BottomNav() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="tb2"
         options={{
           title: 'Partenaires',
           tabBarIcon: ({ color }) => (

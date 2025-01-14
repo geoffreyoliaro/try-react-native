@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Platform } from 'react-native';
 
 import { HapticTab } from '@/components/HapticTab';
@@ -7,10 +7,22 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import * as Font from 'expo-font';
 
 export default function BottomNav() {
+
+  useEffect(() => {
+    Font.loadAsync({
+      // Load the required font icons
+      'FontAwesome': require('react-native-vector-icons/Fonts/FontAwesome.ttf'),
+      // Add more font files if needed
+    });
+  }, []);
+
+
   const colorScheme = useColorScheme();
 
+  
   return (
     <Tabs
       screenOptions={{
@@ -25,6 +37,7 @@ export default function BottomNav() {
             backgroundColor: '#12a661', // Set the tab background color here
           },
           default: {
+            position: 'absolute',
             backgroundColor: '#12a661', // For other platforms, use the same color
           },
         }),
@@ -44,7 +57,7 @@ export default function BottomNav() {
         options={{
           title: 'Partenaires',
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="drop.fill" color={color} />
+            <IconSymbol size={28} name='paperplane.fill' color={color} />
           ),
         }}
       />
@@ -53,7 +66,7 @@ export default function BottomNav() {
         options={{
           title: 'Ecodreum',
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="leaf.fill" color={color} />
+            <IconSymbol size={28} name="apple.logo" color={color} />
           ),
         }}
       />
@@ -62,7 +75,7 @@ export default function BottomNav() {
         options={{
           title: 'Réseautage',
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="cross.fill" color={color} />
+            <IconSymbol size={28} name="archivebox.fill" color={color} />
           ),
         }}
       />
@@ -71,7 +84,7 @@ export default function BottomNav() {
         options={{
           title: 'Profil',
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="person.fill" color={color} />
+            <IconSymbol size={28} name="checkmark.circle.fill" color={color} />
           ),
         }}
       />

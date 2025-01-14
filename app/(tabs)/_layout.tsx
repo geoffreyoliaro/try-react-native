@@ -16,14 +16,17 @@ export default function BottomNav() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
+        tabBarButton: HapticTab,        
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
             // Use a transparent background on iOS to show the blur effect
             position: 'absolute',
+            backgroundColor: '#12a661', // Set the tab background color here
           },
-          default: {},
+          default: {
+            backgroundColor: '#12a661', // For other platforms, use the same color
+          },
         }),
       }}
     >
